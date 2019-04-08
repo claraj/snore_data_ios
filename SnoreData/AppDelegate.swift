@@ -16,7 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let managedContext = persistentContainer.viewContext
+        let navController = window!.rootViewController as! UINavigationController
+        let viewControllers = navController.viewControllers  // All the View Controllers managed by the navigation controller
+        
+        for controller in viewControllers {
+            if let c = controller as? FamilyTableViewController {
+                c.managedContext = managedContext
+            }
+            
+            if let c = controller as? SleepRecordViewController {
+                c.managedContext = managedContext
+            }
+        }
+        
+        let familyTableController = navController.topViewController as! FamilyTableViewController
+        familyTableController.managedContext = managedContext
+        
+        
         return true
     }
 

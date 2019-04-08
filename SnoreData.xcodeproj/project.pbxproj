@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		E7911C7122539D6200891426 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911C7022539D6200891426 /* AppDelegate.swift */; };
-		E7911C7322539D6200891426 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911C7222539D6200891426 /* ViewController.swift */; };
+		E7911C7322539D6200891426 /* FamilyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911C7222539D6200891426 /* FamilyTableViewController.swift */; };
 		E7911C7622539D6200891426 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7911C7422539D6200891426 /* Main.storyboard */; };
 		E7911C7922539D6200891426 /* SnoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7911C7722539D6200891426 /* SnoreData.xcdatamodeld */; };
 		E7911C7B22539D6B00891426 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7911C7A22539D6B00891426 /* Assets.xcassets */; };
 		E7911C7E22539D6B00891426 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7911C7C22539D6B00891426 /* LaunchScreen.storyboard */; };
 		E7911C8922539D6C00891426 /* SnoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911C8822539D6C00891426 /* SnoreDataTests.swift */; };
 		E7911C9422539D6C00891426 /* SnoreDataUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911C9322539D6C00891426 /* SnoreDataUITests.swift */; };
+		E7911CA42253A0D900891426 /* AddEditFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911CA32253A0D900891426 /* AddEditFamilyViewController.swift */; };
+		E7911CA62253A0E900891426 /* SleepRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911CA52253A0E900891426 /* SleepRecordTableViewController.swift */; };
+		E7911CA82253BB6600891426 /* AddSleepRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911CA72253BB6600891426 /* AddSleepRecordViewController.swift */; };
+		E7911CAF2253D71B00891426 /* FamilyMemberModifiedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911CAE2253D71B00891426 /* FamilyMemberModifiedDelegate.swift */; };
+		E7911CB12253D72800891426 /* NewSleepRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7911CB02253D72800891426 /* NewSleepRecordDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +42,7 @@
 /* Begin PBXFileReference section */
 		E7911C6D22539D6200891426 /* SnoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7911C7022539D6200891426 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E7911C7222539D6200891426 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E7911C7222539D6200891426 /* FamilyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTableViewController.swift; sourceTree = "<group>"; };
 		E7911C7522539D6200891426 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7911C7822539D6200891426 /* SnoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SnoreData.xcdatamodel; sourceTree = "<group>"; };
 		E7911C7A22539D6B00891426 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +54,11 @@
 		E7911C8F22539D6C00891426 /* SnoreDataUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnoreDataUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7911C9322539D6C00891426 /* SnoreDataUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoreDataUITests.swift; sourceTree = "<group>"; };
 		E7911C9522539D6C00891426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7911CA32253A0D900891426 /* AddEditFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditFamilyViewController.swift; sourceTree = "<group>"; };
+		E7911CA52253A0E900891426 /* SleepRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordTableViewController.swift; sourceTree = "<group>"; };
+		E7911CA72253BB6600891426 /* AddSleepRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSleepRecordViewController.swift; sourceTree = "<group>"; };
+		E7911CAE2253D71B00891426 /* FamilyMemberModifiedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMemberModifiedDelegate.swift; sourceTree = "<group>"; };
+		E7911CB02253D72800891426 /* NewSleepRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSleepRecordDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +109,14 @@
 		E7911C6F22539D6200891426 /* SnoreData */ = {
 			isa = PBXGroup;
 			children = (
+				E7911CAD2253D70D00891426 /* Delegates */,
+				E7911CA22253A07300891426 /* Models */,
+				E7911CA12253A05800891426 /* ViewControllers */,
 				E7911C7022539D6200891426 /* AppDelegate.swift */,
-				E7911C7222539D6200891426 /* ViewController.swift */,
 				E7911C7422539D6200891426 /* Main.storyboard */,
 				E7911C7A22539D6B00891426 /* Assets.xcassets */,
 				E7911C7C22539D6B00891426 /* LaunchScreen.storyboard */,
 				E7911C7F22539D6B00891426 /* Info.plist */,
-				E7911C7722539D6200891426 /* SnoreData.xcdatamodeld */,
 			);
 			path = SnoreData;
 			sourceTree = "<group>";
@@ -126,6 +137,34 @@
 				E7911C9522539D6C00891426 /* Info.plist */,
 			);
 			path = SnoreDataUITests;
+			sourceTree = "<group>";
+		};
+		E7911CA12253A05800891426 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E7911C7222539D6200891426 /* FamilyTableViewController.swift */,
+				E7911CA32253A0D900891426 /* AddEditFamilyViewController.swift */,
+				E7911CA72253BB6600891426 /* AddSleepRecordViewController.swift */,
+				E7911CA52253A0E900891426 /* SleepRecordTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E7911CA22253A07300891426 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E7911C7722539D6200891426 /* SnoreData.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E7911CAD2253D70D00891426 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				E7911CAE2253D71B00891426 /* FamilyMemberModifiedDelegate.swift */,
+				E7911CB02253D72800891426 /* NewSleepRecordDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +298,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7911C7322539D6200891426 /* ViewController.swift in Sources */,
+				E7911CA42253A0D900891426 /* AddEditFamilyViewController.swift in Sources */,
+				E7911CB12253D72800891426 /* NewSleepRecordDelegate.swift in Sources */,
+				E7911CAF2253D71B00891426 /* FamilyMemberModifiedDelegate.swift in Sources */,
+				E7911CA82253BB6600891426 /* AddSleepRecordViewController.swift in Sources */,
+				E7911C7322539D6200891426 /* FamilyTableViewController.swift in Sources */,
 				E7911C7122539D6200891426 /* AppDelegate.swift in Sources */,
 				E7911C7922539D6200891426 /* SnoreData.xcdatamodeld in Sources */,
+				E7911CA62253A0E900891426 /* SleepRecordTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
