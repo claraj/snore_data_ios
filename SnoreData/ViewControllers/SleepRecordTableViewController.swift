@@ -11,35 +11,37 @@ import UIKit
 import CoreData
 
 
-class SleepRecordViewController: UITableViewController, NSFetchedResultsControllerDelegate, NewSleepRecordDelegate {
+class SleepRecordViewController: UITableViewController, NSFetchedResultsControllerDelegate, SleepRecordDelegate {
     
     var familyMember: FamilyMember?
     var managedContext: NSManagedObjectContext?
     var fetchedSleepRecordsController: NSFetchedResultsController<SleepRecord>?
+    var sleepRecords: [SleepRecord] = []
 
-    
     let dateFormatter = { () -> DateFormatter in
         let df = DateFormatter()
-        df.dateStyle = .short
+        df.dateStyle = .long
         return df
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        assert(familyMember != nil)
+        guard let familyMember = familyMember else {
+            preconditionFailure("Family Member must be set")
+        }
         
-        let familyPredicate = NSPredicate(format: "familyMember == %@", familyMember!)
+        navigationItem.title = "Sleep Records for \(familyMember.name!)"
+        
+        let familyPredicate = NSPredicate(format: "familyMember == %@", familyMember)
 
-    
-       // let predicate = NSPredicate(format: "familyMember == %@", familyMember!)
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false) // most recent at the top
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false) // most recent first
 
         let sleepRecordsFetch = NSFetchRequest<SleepRecord>(entityName: "SleepRecord")
         sleepRecordsFetch.sortDescriptors = [sortDescriptor]
         sleepRecordsFetch.predicate = familyPredicate
         
-        fetchedSleepRecordsController = NSFetchedResultsController(fetchRequest: sleepRecordsFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedSleepRecordsController = NSFetchedResultsController<SleepRecord>(fetchRequest: sleepRecordsFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
         
         fetchedSleepRecordsController?.delegate = self
         
@@ -58,38 +60,29 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
         sleepRecord.date = date
         sleepRecord.familyMember = familyMember
         
-        
         do {
             try sleepRecord.validateForInsert()
-            print("valid!")
             try managedContext!.save()
         } catch {
             print("Error saving new sleep record because \(error)")
         }
-        
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        navigationItem.title = "Sleep Records"
-    }
-    
     
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
-        
-        print("CHANGED CONTENT")
+        sleepRecords = controller.fetchedObjects as! [SleepRecord]
         tableView.reloadData()
     }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let objects = fetchedSleepRecordsController!.fetchedObjects{
-            return objects.count
-        } else {
-            return 0
-        }
+        return sleepRecords.count
+//        if let objects = fetchedSleepRecordsController!.fetchedObjects{
+//            return objects.count
+//        } else {
+//            return 0
+//        }
     }
     
     
@@ -97,25 +90,22 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SleepRecordTableCell")!
         
-        let sleepRecord = fetchedSleepRecordsController?.fetchedObjects![indexPath.row]
+      //  let sleepRecord = fetchedSleepRecordsController!.fetchedObjects![indexPath.row]
         
-        cell.textLabel?.text = dateFormatter.string(from: sleepRecord!.date!) 
-        cell.detailTextLabel!.text = "\(sleepRecord!.hours) hours"
+        let sleepRecord = sleepRecords[indexPath.row]
+        cell.textLabel?.text = dateFormatter.string(from: sleepRecord.date!)
+        cell.detailTextLabel!.text = "\(sleepRecord.hours) hours"
         
         return cell
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addSleepRecord" {
             let addRecordController = segue.destination as! AddSleepRecordViewController
-            
             addRecordController.delegate = self
             addRecordController.familyMember = familyMember!
-            
-
         }
     }
-
-
     
 }

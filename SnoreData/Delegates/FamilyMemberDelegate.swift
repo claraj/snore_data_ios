@@ -8,7 +8,8 @@
 
 import Foundation
 
-protocol FamilyMemberModifiedDelegate {
+protocol FamilyMemberDelegate {
     func newfamilyMember(name: String, age: Int16) -> Void
-    func modifiedfamilyMember(familyMember: FamilyMember) -> Void
+    func modify(familyMember: FamilyMember) -> Void
+    func delete(familyMember: FamilyMember) -> Void
 }

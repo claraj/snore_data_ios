@@ -9,92 +9,74 @@
 import UIKit
 import CoreData
 
-class FamilyTableViewController: UITableViewController, FamilyMemberModifiedDelegate, NSFetchedResultsControllerDelegate {
+class FamilyTableViewController: UITableViewController, FamilyMemberDelegate, NSFetchedResultsControllerDelegate {
 
     var managedContext: NSManagedObjectContext?
     
-    //var familyMemberObjects: [FamilyMember] = []
+    var familyMemberObjects: [FamilyMember] = []
     var fetchResultsController: NSFetchedResultsController<FamilyMember>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        // sort descriptors are required
+        // At least one sort descriptor is required
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         let familyFetch = NSFetchRequest<FamilyMember>(entityName: "FamilyMember")
         familyFetch.sortDescriptors = [sortDescriptor]
 
         fetchResultsController = NSFetchedResultsController(fetchRequest: familyFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
 
-        fetchResultsController?.delegate = self
+        fetchResultsController!.delegate = self
         
         do {
-            try fetchResultsController?.performFetch()
+            try fetchResultsController!.performFetch()
+            familyMemberObjects = fetchResultsController!.fetchedObjects!
         } catch {
             print("Error fetching family members \(error)")
         }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
-        print("CHANGED CONTENT")
-       // print(controller.fetchedObjects)
-        
-        //familyMemberObjects = controller.fetchedObjects as! [FamilyMember]
+        familyMemberObjects = controller.fetchedObjects as! [FamilyMember]
         tableView.reloadData()
     }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return (fetchResultsController?.fetchedObjects!.count)!
-//        return familyMemberObjects.count  // todo return number of family members
+        return familyMemberObjects.count
     }
     
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-       // let familyMember = familyMemberObjects[indexPath.row]
+        let familyMember = familyMemberObjects[indexPath.row]
         
-        let familyMember = fetchResultsController?.fetchedObjects![indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "FamilyTableCell")!
-        cell.textLabel?.text = familyMember!.name
-        cell.detailTextLabel?.text = "\(familyMember!.age) years old"
+        cell.textLabel?.text = familyMember.name
+        cell.detailTextLabel?.text = "\(familyMember.age) years old"
         
         return cell
-        
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
-        print(segue.identifier)
         switch segue.identifier {
+            
         case "editFamilyMember":
-            
-            print("edit")
-            
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPath(for: cell)!
-            
-            print("selected index path ")
-            let row = indexPath.row
-            let selectedFamilyMember =  fetchResultsController?.fetchedObjects![row]
+            let selectedRow = indexPath.row
+            let selectedFamilyMember =  fetchResultsController?.fetchedObjects![selectedRow]
             let destination = segue.destination as! AddEditFamilyMemberViewController
             destination.familyMember = selectedFamilyMember
             destination.familyDelegate = self
         
         case "addFamilyMember":
-            print("add")
-            
             let destination = segue.destination as! AddEditFamilyMemberViewController
-           // destination.familyMember = selectedFamilyMember
             destination.familyDelegate = self
             
         case "showFamilyMemberSleepRecords":
-            print("show")
-            // who was selected?
-
             let selectedRow = tableView.indexPathForSelectedRow!.row
             let familyMember = fetchResultsController!.fetchedObjects![selectedRow]
 
@@ -110,37 +92,40 @@ class FamilyTableViewController: UITableViewController, FamilyMemberModifiedDele
     
     func newfamilyMember(name: String, age: Int16) {
         
-        print("NEW FAMILY MEMBER")
-        
         let familyEntity = FamilyMember(context: managedContext!)
         familyEntity.name = name
         familyEntity.age = age
         
-        
         do {
-            try familyEntity.validateForInsert()
-            print("IT IS VALID")
             try managedContext!.save()
         } catch {
             managedContext!.reset()
-            print("error adding new \(error)")
+            showAlert(title: "Error", message: "Unable to add family member")
+            print("Error adding new family member, \(error)")
         }
-        
     }
     
     
-    func modifiedfamilyMember(familyMember: FamilyMember) {
-
-        print("MOD FAM MEMBER")
-        
+    func modify(familyMember: FamilyMember) {
         do {
             try familyMember.validateForUpdate()
             try managedContext!.save()
         } catch {
             managedContext!.reset()
-            print("Error saving, \(error)")
+            showAlert(title: "Error", message: "Unable to modify family member")
+            print("Error saving family member, \(error)")
         }
-        
+    }
+    
+    func delete(familyMember: FamilyMember) {
+        do {
+            managedContext!.delete(familyMember)
+            try managedContext!.save()
+        } catch {
+            managedContext!.reset()
+            showAlert(title: "Error", message: "Unable to delete family member")
+            print("Error deleting family member, \(error)")
+        }
     }
     
 }

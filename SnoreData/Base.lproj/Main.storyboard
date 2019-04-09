@@ -161,7 +161,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="76" translatesAutoresizingMaskIntoConstraints="NO" id="C4c-FC-W5u">
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" alignment="center" spacing="87" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4c-FC-W5u">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6KN-pR-JBl">
@@ -174,7 +174,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wHO-QW-gxW">
-                                        <rect key="frame" x="87.5" y="106" width="200" height="30"/>
+                                        <rect key="frame" x="87.5" y="287" width="200" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="YCA-If-PME"/>
                                         </constraints>
@@ -183,10 +183,19 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkI-tN-eWR">
-                                        <rect key="frame" x="170.5" y="212" width="34" height="391"/>
+                                        <rect key="frame" x="170.5" y="573" width="34" height="30"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="save:" destination="hiz-gl-AKx" eventType="touchUpInside" id="cbO-GC-yeW"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T7-IU-7cM">
+                                        <rect key="frame" x="111" y="593.5" width="153" height="0.0"/>
+                                        <state key="normal" title="Delete Family Member">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.05677406258" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteFamilyMember:" destination="hiz-gl-AKx" eventType="touchUpInside" id="jUj-cQ-ahn"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -203,6 +212,7 @@
                     </view>
                     <connections>
                         <outlet property="ageTextField" destination="wHO-QW-gxW" id="7D7-GO-IFj"/>
+                        <outlet property="deleteButton" destination="9T7-IU-7cM" id="wny-2u-m00"/>
                         <outlet property="nameTextField" destination="6KN-pR-JBl" id="hCw-Tz-vVP"/>
                     </connections>
                 </viewController>

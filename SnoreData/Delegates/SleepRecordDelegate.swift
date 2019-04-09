@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol NewSleepRecordDelegate {
+protocol SleepRecordDelegate {
     func sleepRecord(familyMember: FamilyMember, hours: Float, date: Date) -> Void
 }
