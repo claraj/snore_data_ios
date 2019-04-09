@@ -22,12 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewControllers = navController.viewControllers  // All the View Controllers managed by the navigation controller
         
         for controller in viewControllers {
-            if let c = controller as? FamilyTableViewController {
-                c.managedContext = managedContext
+            if let controller = controller as? FamilyTableViewController {
+                controller.managedContext = managedContext
             }
             
-            if let c = controller as? SleepRecordViewController {
-                c.managedContext = managedContext
+            if let controller = controller as? SleepRecordViewController {
+                controller.managedContext = managedContext
             }
         }
         

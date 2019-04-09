@@ -14,7 +14,6 @@ class FamilyTableViewController: UITableViewController, FamilyMemberDelegate, NS
     var managedContext: NSManagedObjectContext?
     
     var familyMemberObjects: [FamilyMember] = []
-    var fetchResultsController: NSFetchedResultsController<FamilyMember>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,13 +23,13 @@ class FamilyTableViewController: UITableViewController, FamilyMemberDelegate, NS
         let familyFetch = NSFetchRequest<FamilyMember>(entityName: "FamilyMember")
         familyFetch.sortDescriptors = [sortDescriptor]
 
-        fetchResultsController = NSFetchedResultsController(fetchRequest: familyFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultsController = NSFetchedResultsController(fetchRequest: familyFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
 
-        fetchResultsController!.delegate = self
+        fetchResultsController.delegate = self
         
         do {
-            try fetchResultsController!.performFetch()
-            familyMemberObjects = fetchResultsController!.fetchedObjects!
+            try fetchResultsController.performFetch()
+            familyMemberObjects = fetchResultsController.fetchedObjects!
         } catch {
             print("Error fetching family members \(error)")
         }
@@ -67,7 +66,7 @@ class FamilyTableViewController: UITableViewController, FamilyMemberDelegate, NS
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPath(for: cell)!
             let selectedRow = indexPath.row
-            let selectedFamilyMember =  fetchResultsController?.fetchedObjects![selectedRow]
+            let selectedFamilyMember =  familyMemberObjects[selectedRow]
             let destination = segue.destination as! AddEditFamilyMemberViewController
             destination.familyMember = selectedFamilyMember
             destination.familyDelegate = self
@@ -78,8 +77,7 @@ class FamilyTableViewController: UITableViewController, FamilyMemberDelegate, NS
             
         case "showFamilyMemberSleepRecords":
             let selectedRow = tableView.indexPathForSelectedRow!.row
-            let familyMember = fetchResultsController!.fetchedObjects![selectedRow]
-
+            let familyMember = familyMemberObjects[selectedRow]
             let destination = segue.destination as! SleepRecordViewController
             destination.managedContext = managedContext
             destination.familyMember = familyMember
