@@ -15,6 +15,9 @@ class FamilyTableViewController: UITableViewController, FamilyMemberDelegate, NS
     
     var familyMemberObjects: [FamilyMember] = []
     
+    // Make this global so it doesn't go out of scope, otherwise delegate function won't be called
+    var fetchResultsController: NSFetchedResultsController<FamilyMember>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -23,13 +26,13 @@ class FamilyTableViewController: UITableViewController, FamilyMemberDelegate, NS
         let familyFetch = NSFetchRequest<FamilyMember>(entityName: "FamilyMember")
         familyFetch.sortDescriptors = [sortDescriptor]
 
-        let fetchResultsController = NSFetchedResultsController(fetchRequest: familyFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultsController = NSFetchedResultsController(fetchRequest: familyFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
 
-        fetchResultsController.delegate = self
+        fetchResultsController!.delegate = self
         
         do {
-            try fetchResultsController.performFetch()
-            familyMemberObjects = fetchResultsController.fetchedObjects!
+            try fetchResultsController!.performFetch()
+            familyMemberObjects = fetchResultsController!.fetchedObjects!
         } catch {
             print("Error fetching family members \(error)")
         }
