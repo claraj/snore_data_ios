@@ -9,5 +9,7 @@
 import Foundation
 
 protocol SleepRecordDelegate {
-    func sleepRecord(familyMember: FamilyMember, hours: Float, date: Date) -> Void
+    func newSleepRecord(familyMember: FamilyMember, hours: Float, date: Date) -> Void
 }
+
+

@@ -53,7 +53,7 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
         
     }
     
-    func sleepRecord(familyMember: FamilyMember, hours: Float, date: Date) {
+    func newSleepRecord(familyMember: FamilyMember, hours: Float, date: Date) {
         
         let sleepRecord = SleepRecord(context: managedContext!)
         sleepRecord.hours = hours
@@ -76,22 +76,14 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         return sleepRecords.count
-//        if let objects = fetchedSleepRecordsController!.fetchedObjects{
-//            return objects.count
-//        } else {
-//            return 0
-//        }
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SleepRecordTableCell")!
-        
-      //  let sleepRecord = fetchedSleepRecordsController!.fetchedObjects![indexPath.row]
-        
         let sleepRecord = sleepRecords[indexPath.row]
         cell.textLabel?.text = dateFormatter.string(from: sleepRecord.date!)
         cell.detailTextLabel!.text = "\(sleepRecord.hours) hours"

@@ -44,7 +44,7 @@ class AddSleepRecordViewController: UIViewController {
         
         let date = datePicker.date
         
-        delegate!.sleepRecord(familyMember: familyMember!,  hours: hours, date: date)
+        delegate!.newSleepRecord(familyMember: familyMember!,  hours: hours, date: date)
         self.navigationController?.popViewController(animated: true)
     }
 }
