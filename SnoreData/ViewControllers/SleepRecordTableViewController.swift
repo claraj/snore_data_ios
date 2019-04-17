@@ -27,13 +27,6 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(true)
-        
         guard let familyMember = familyMember else {
             preconditionFailure("Family Member must be set")
         }
@@ -50,11 +43,11 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
         
         fetchedSleepRecordsController = NSFetchedResultsController<SleepRecord>(fetchRequest: sleepRecordsFetch, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
         
-        fetchedSleepRecordsController?.delegate = self
+        fetchedSleepRecordsController!.delegate = self
         
         do {
-            try fetchedSleepRecordsController?.performFetch()
-            sleepRecords = (fetchedSleepRecordsController?.fetchedObjects)!
+            try fetchedSleepRecordsController!.performFetch()
+            sleepRecords = fetchedSleepRecordsController!.fetchedObjects!
         } catch {
             print("error fetching sleep records \(error)")
         }
