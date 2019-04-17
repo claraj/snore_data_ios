@@ -27,6 +27,13 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(true)
+        
         guard let familyMember = familyMember else {
             preconditionFailure("Family Member must be set")
         }
@@ -47,6 +54,7 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
         
         do {
             try fetchedSleepRecordsController?.performFetch()
+            sleepRecords = (fetchedSleepRecordsController?.fetchedObjects)!
         } catch {
             print("error fetching sleep records \(error)")
         }
@@ -76,7 +84,6 @@ class SleepRecordViewController: UITableViewController, NSFetchedResultsControll
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return sleepRecords.count
     }
     

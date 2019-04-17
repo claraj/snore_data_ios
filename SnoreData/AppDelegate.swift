@@ -30,11 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 controller.managedContext = managedContext
             }
         }
-        
-        let familyTableController = navController.topViewController as! FamilyTableViewController
-        familyTableController.managedContext = managedContext
-        
-        
+ 
+    
         return true
     }
 
